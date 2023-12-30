@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: UseJavaVersion@17
+- task: UseJavaVersion@0
   inputs:
     versionSpec: '11'
     addToPath: true
