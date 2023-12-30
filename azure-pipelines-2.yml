@@ -1,0 +1,22 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UseJavaVersion@17
+  inputs:
+    versionSpec: '11'
+    addToPath: true
+
+- script: 'mvn clean test'
+  displayName: 'Run TestNG Tests'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    mergeTestResults: true
+    testRunTitle: 'TestNG Test Run'
